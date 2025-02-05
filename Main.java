@@ -12,51 +12,13 @@ public class Main {
 
     // Create some sample access cards with unique cardIds
     private AccessCard[] accessCards = {
-            new AccessCard("MG001", Arrays.asList("Low", "Medium", "High"), Arrays.asList("Room101", "Room102", "Room201", "Room202", "Room301", "Room302")),  // Manager card
-            new AccessCard("EP001", Arrays.asList("Low", "Medium"), Arrays.asList("Room101", "Room102", "Room201", "Room202")),  // Employee card
-            new AccessCard("VS001", Arrays.asList("Low"), Arrays.asList("Meeting Room" , "Room101"))  // Visitor card
+            new AccessCard("Card1-JohnDoe", Arrays.asList("Low Floor", "Medium Floor"), Arrays.asList("Room 101", "Room 102")),
+            new AccessCard("Card2-Alice123", Arrays.asList("Medium Floor"), Arrays.asList("Meeting Room", "Room 201")),
+            new AccessCard("Card3-BobXYZ", Arrays.asList("High Floor"), Arrays.asList("Room 301", "Room 302"))
     };
 
     public Main() {
-        JFrame frame = new JFrame("Login with");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-
-        JLabel titleLabel = new JLabel("Login with:", SwingConstants.CENTER);
-        titleLabel.setBounds(100, 5, 100, 20);
-        frame.add(titleLabel);
-
-        // Create buttons for Manager, Employee, Visitors
-        JButton managerButton = new JButton("Manager");
-        JButton employeeButton = new JButton("Employee");
-        JButton visitorsButton = new JButton("Visitors");
-
-        // Set positions and sizes of buttons
-        managerButton.setBounds(100, 30, 100, 30);
-        employeeButton.setBounds(100, 70, 100, 30);
-        visitorsButton.setBounds(100, 110, 100, 30);
-
-        // Add ActionListener for each button
-        managerButton.addActionListener(e -> openAccessWindow("Manager"));
-        employeeButton.addActionListener(e -> openAccessWindow("Employee"));
-        visitorsButton.addActionListener(e -> openAccessWindow("Visitors"));
-
-        // Add buttons to the frame
-        frame.setLayout(null);
-        frame.add(managerButton);
-        frame.add(employeeButton);
-        frame.add(visitorsButton);
-
-        // Display the frame
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-
-    public void openAccessWindow(String role) {
         frame = new JFrame("Access Control System");
-
-        JLabel roleLabel = new JLabel("Role: " + role);
-        roleLabel.setBounds(20, 20, 200, 20);
 
         JLabel cardIdLabel = new JLabel("Card ID:");
         cardIdLabel.setBounds(10, 10, 80, 25);
@@ -107,6 +69,7 @@ public class Main {
             }
         }
 
+        // If card is found, check the access
         if (selectedCard != null) {
             AccessControl accessControl = new FloorAccess();  // Example: Check access to floor
             accessControl.setAccessCard(selectedCard);
@@ -117,12 +80,11 @@ public class Main {
 
             JOptionPane.showMessageDialog(frame, "Date and Time: " + dateTime + "\n" + result);
         } else {
-            JOptionPane.showMessageDialog(frame, "Card ID not found.!");
+            JOptionPane.showMessageDialog(frame, "Card ID not found!");
         }
     }
 
     public static void main(String[] args) {
         new Main();
     }
-
 }
